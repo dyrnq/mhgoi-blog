@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mhgoi.blog.mapper.ArticleMapper">
+    <resultMap id="BaseResultMap" type="net.mhgoi.blog.dto.ArticleDto">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="author_id" jdbcType="VARCHAR" property="authorId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="category_id" jdbcType="VARCHAR" property="categoryId"/>
+        <result column="summary" jdbcType="LONGVARCHAR" property="summary"/>
+        <result column="content_markdown" jdbcType="LONGVARCHAR" property="contentMarkdown"/>
+        <result column="views_count" jdbcType="INTEGER" property="viewsCount"/>
+        <result column="comments_count" jdbcType="INTEGER" property="commentsCount"/>
+        <result column="top" jdbcType="INTEGER" property="top"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime"/>
+        <result column="state" jdbcType="CHAR" property="state"/>
+    </resultMap>
+    <sql id="Base_Column_List" databaseId="postgresql">
+        id, author_id, title, slug, category_id, summary, content_markdown, views_count, comments_count,
+        top, create_time, modified_time, `state`
+    </sql>
+    <sql id="Base_Column_List" databaseId="mysql">
+        id, author_id, title, slug, category_id, summary, content_markdown, views_count, comments_count,
+        top, create_time, modified_time, state
+    </sql>
+    <sql id="Select_List">
+            a.id,
+            a.author_id,
+            u.username,
+            u.fullname,
+            u.avatar,
+            a.title,
+            a.slug,
+            a.category_id,
+            c.name category_name,
+            a.summary,
+            a.views_count,
+            a.comments_count,
+            a.top,
+            a.image_url,
+            a.create_time,
+            a.modified_time
+    </sql>
+
+    <select id="queryPage" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Select_List"></include>
+        FROM
+        ${prefix}article a
+        LEFT JOIN ${prefix}user u ON a.author_id = u.id
+        LEFT JOIN ${prefix}category c ON a.category_id = c.id
+        <where>
+            <if test="categoryId != null and categoryId != ''">
+                and a.category_id = #{categoryId}
+            </if>
+            <if test="searchWords != null and searchWords != ''">
+                and ( a.title like concat('%',#{searchWords},'%') or a.summary like concat('%',#{searchWords},'%') )
+            </if>
+            <if test="title != null and title != ''">
+                and a.title like concat('%',#{title},'%')
+            </if>
+            <if test="username != null and username != ''">
+                and u.username like concat('%',#{username},'%')
+            </if>
+        </where>
+        ORDER BY
+        a.top DESC,
+        a.create_time DESC
+    </select>
+
+
+    <select id="getArticleTags" resultType="net.mhgoi.blog.entity.Tag">
+        SELECT
+        t.id,
+        t.name,
+        t.sort
+        FROM
+        ${prefix}article_tag atag,
+        ${prefix}tag t
+        WHERE
+        atag.tag_id = t.id
+        AND atag.article_id = #{id}
+    </select>
+
+    <select id="getArticleTagNames" resultType="java.lang.String">
+        SELECT
+        t.name
+        FROM
+        ${prefix}article_tag atag,
+        ${prefix}tag t
+        WHERE
+        atag.tag_id = t.id
+        AND atag.article_id = #{id}
+    </select>    
+    
+    <resultMap id="MyResultMap" type="net.mhgoi.blog.dto.ArticleDto">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <!--<collection property="tags" ofType="net.mhgoi.blog.entity.Tag" select="getArticleTags" column="id"></collection>-->
+        <collection property="tagNames" ofType="java.lang.String" select="getArticleTagNames" column="id"></collection>
+    </resultMap>
+    <select id="getById" resultMap="MyResultMap">
+        SELECT
+        <include refid="Select_List"/>
+        ,
+        a.content_markdown
+        FROM
+        ${prefix}article a,
+        ${prefix}user u,
+        ${prefix}category c
+        WHERE
+        a.author_id = u.id
+        AND a.category_id = c.id
+        AND a.id = #{id}
+    </select>
+
+	<select id="getBySlug" resultMap="MyResultMap">
+        SELECT
+        <include refid="Select_List"/>
+        ,
+        a.content_markdown
+        FROM
+        ${prefix}article a,
+        ${prefix}user u,
+        ${prefix}category c
+        WHERE
+        a.author_id = u.id
+        AND a.category_id = c.id
+        AND a.slug = #{slug}
+    </select>    
+    
+    <insert id="addArticleTags">
+        insert into ${prefix}article_tag (article_id, tag_id) values
+        <foreach collection="tagIds" item="tagId" separator=",">
+            (#{articleId,jdbcType=VARCHAR}, #{tagId,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <delete id="deleteArticleTags">
+        delete from ${prefix}article_tag where article_id = #{articleId}
+    </delete>
+
+
+    <update id="incCommentsCount">
+        update ${prefix}article set comments_count = comments_count + #{counts} where id = #{articleId}
+    </update>
+    <update id="incViewsCount">
+        update ${prefix}article set views_count = views_count + #{counts} where id = #{articleId}
+    </update>
+
+
+    <resultMap id="ArchiveResultMap" type="net.mhgoi.blog.dto.Archive">
+        <result column="archive_time" property="archiveTime"/>
+        <collection property="archiveArticles" ofType="net.mhgoi.blog.dto.ArchiveArticle">
+            <id column="article_id" property="id"/>
+            <result column="title" property="title"/>
+            <result column="slug" property="slug"/>
+            <result column="day" property="day"/>
+        </collection>
+    </resultMap>
+    
+    <select id="getArchive" resultMap="ArchiveResultMap" databaseId="mysql">
+        SELECT
+            a.id article_id,
+            a.title,
+            a.slug,
+            DATE_FORMAT(a.create_time, '%Y-%m') archive_time,
+            DATE_FORMAT(a.create_time, '%d')  `day`
+        FROM
+            ${prefix}article a
+        ORDER BY
+            a.create_time DESC
+    </select>
+	<select id="getArchive" resultMap="ArchiveResultMap" databaseId="postgresql">
+ 		SELECT
+            a.id article_id,
+            a.title,
+            a.slug,
+            to_char(a.create_time,'YYYY-MM' ) archive_time,
+            to_char(a.create_time,'DD' )  ‘day‘
+        FROM
+            ${prefix}article a
+        ORDER BY
+            a.create_time DESC            
+    </select>    
+    <select id="getArticleByTag" resultType="net.mhgoi.blog.entity.Article">
+        SELECT
+            a.id,
+            a.title,
+            a.slug,
+            a.image_url
+        FROM
+            ${prefix}article a
+            LEFT JOIN ${prefix}article_tag t ON a.id = t.article_id
+        WHERE
+            t.tag_id = #{tagId}
+    </select>
+
+</mapper>

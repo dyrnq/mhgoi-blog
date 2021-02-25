@@ -1,0 +1,123 @@
+server:
+  port: 8001
+  use-forward-headers: true
+  servlet:
+    context-path: /api
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 500
+    min-spare-threads: 30
+#     accept-count: 300
+#     enable-lookups: false
+#     keep-alive-timeout: -1
+
+
+
+application: 
+  version: 1.0.0
+  upload-path: /data/pic
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:13306/mhgoi_blog?characterEncoding=utf-8&useSSL=false&autoReconnect=true&allowPublicKeyRetrieval=true
+    username: jack
+    password: 666666
+#  flyway:
+#    enabled: true
+#    baseline-on-migrate: true
+#    check-location: true
+#    locations: classpath:db/migration
+#    validate-on-migrate: true
+  redis:
+    host: 127.0.0.1
+  jackson:
+    default-property-inclusion: non_null
+#     serialization:
+#       INDENT_OUTPUT: true
+#     date-format: yyyy-MM-dd HH:mm:ss
+#     time-zone: Asia/Shanghai
+
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      table-prefix: tb_
+  configuration-properties:
+    prefix: tb_
+
+
+jwt:
+  secretKey: abcdefghijklmnopqrstuvwxyz1234567890
+  expirationTime: 86400000
+  header: Authorization
+
+  
+# aliyun:
+#   sms:
+#     accessKeyId: xxx
+#     accessKeySecret: xxx
+#     template_code: xxx
+#     sign_name: xxx
+    
+#qiniu:
+#  accessKey: xxx
+#  secretKey: xxx
+#  bucket: xxx
+  
+emial:
+  hostName: smtp.qq.com
+  charset: utf-8
+  from: xxx@qq.com
+  fromName: xxx
+  username: xxx@qq.com
+  password: xxx
+  port: 465
+  
+logging:
+  level:
+    root: INFO
+#    net.mhgoi.blog.mapper: DEBUG
+  pattern:
+    console: "%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n"
+
+
+---
+spring:
+  profiles: dev-postgresql
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/mhgoi_blog?&ssl=false
+    username: jack
+    password: 666666
+---
+spring:
+  profiles: dev-cockroach
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:26257/mhgoi_blog?&ssl=false
+    username: jack
+    password: 666666
+---
+spring:
+  profiles: dev-mysql57
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mhgoi_blog?characterEncoding=utf-8&useSSL=false&autoReconnect=true
+    username: jack
+    password: 666666
+---
+spring:
+  profiles: dev-mysql8
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:13306/mhgoi_blog?characterEncoding=utf-8&useSSL=false&autoReconnect=true&allowPublicKeyRetrieval=true
+    username: jack
+    password: 666666

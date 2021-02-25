@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mhgoi.blog.mapper.ApiMapper">
+    <resultMap id="BaseResultMap" type="net.mhgoi.blog.entity.Api">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="api_name" jdbcType="VARCHAR" property="apiName"/>
+        <result column="api_url" jdbcType="VARCHAR" property="apiUrl"/>
+        <result column="api_method" jdbcType="VARCHAR" property="apiMethod"/>
+        <result column="open" jdbcType="INTEGER" property="open" />
+        <result column="api_sort" jdbcType="VARCHAR" property="apiSort"/>
+        <result column="description" jdbcType="INTEGER" property="description"/>
+        <result column="module_name" jdbcType="VARBINARY" property="moduleName"/>
+    </resultMap>
+
+    <!--  根据用户名称获得API URL资源鉴权  -->
+    <select id="getApiByUserName" resultMap="BaseResultMap">
+        SELECT
+            api.api_url,
+            api.api_method
+        FROM
+            ${prefix}user_role ur,
+            ${prefix}user u,
+            ${prefix}role_api ra,
+            ${prefix}api api
+        WHERE
+            ur.user_id = u.id
+            AND ur.role_id = ra.role_id
+            AND ra.api_id = api.id
+            AND u.username = #{username}
+        GROUP BY
+            api_url,
+            api_method
+    </select>
+
+    <select id="queryPage" resultMap="BaseResultMap">
+        SELECT
+            b.id,
+            b.api_name,
+            b.api_url,
+            b.api_method,
+            b.module_name,
+            b.open,
+            b.api_sort,
+            b.description
+        FROM
+            ${prefix}api b
+        <where>
+            <if test="apiName != null and apiName != ''">
+                and b.api_name like concat('%',#{apiName},'%')
+            </if>
+            <if test="apiUrl != null and apiUrl != ''">
+                and b.api_url like concat('%',#{apiUrl},'%')
+            </if>
+            <if test="apiMethod != null and apiMethod != ''">
+                and b.api_method like concat('%',#{apiMethod},'%')
+            </if>
+            <if test="moduleName != null and moduleName != ''">
+                and b.module_name = #{moduleName}
+            </if>            
+            <if test="open != null and open != ''">
+                and b.open = #{open}
+            </if>
+        </where>
+        order by b.api_sort
+    </select>
+    <select id="getById" resultMap="BaseResultMap">
+        SELECT
+            b.id,
+            b.api_name,
+            b.api_url,
+            b.api_method,
+            b.module_name,
+            b.api_sort,
+            b.open,
+            b.description
+        FROM
+            ${prefix}api b
+        WHERE
+            b.id = #{id}
+    </select>
+    <delete id="deleteOwnedApi">
+        delete from ${prefix}role_api where role_id = #{roleId}
+    </delete>
+    <delete id="addOwnedApi">
+        insert into ${prefix}role_api(role_id, api_id) values
+        <foreach collection="apiIds" item="item" separator=",">
+            (#{roleId,jdbcType=VARCHAR}, #{item,jdbcType=VARCHAR})
+        </foreach>
+    </delete>
+    <select id="getByRoleId" resultMap="BaseResultMap">
+        SELECT
+            a.id,a.api_name,a.api_url,a.api_method
+        FROM
+            ${prefix}role_api ra,
+            ${prefix}api a
+        WHERE
+            ra.api_id = a.id
+            AND ra.role_id = #{roleId}
+    </select>
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+            b.id,
+            b.api_name,
+            b.module_name
+        FROM
+            ${prefix}api b ORDER BY b.module_name
+    </select>
+
+    <select id="getModules" resultType="java.lang.String">
+    	select distinct module_name from ${prefix}api;
+    </select>
+    
+</mapper>

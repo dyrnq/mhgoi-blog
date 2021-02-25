@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mhgoi.blog.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="net.mhgoi.blog.entity.Role">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="role_code" jdbcType="VARCHAR" property="roleCode"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, role_code, role_name, description
+  </sql>
+
+    <select id="getRoleCodeByUserId" resultType="java.lang.String">
+        SELECT
+            r.role_code
+        FROM
+            ${prefix}user u,
+            ${prefix}user_role ur,
+            ${prefix}role r
+        WHERE
+            u.id = ur.user_id
+            AND ur.role_id = r.id
+            AND u.id = #{userId}
+    </select>
+
+    <select id="getRoleByUserId" resultMap="BaseResultMap">
+        SELECT
+            r.id, r.role_name
+        FROM
+            ${prefix}user u,
+            ${prefix}user_role ur,
+            ${prefix}role r
+        WHERE
+            u.id = ur.user_id
+            AND ur.role_id = r.id
+            AND u.id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="addOwnedRole">
+        insert into ${prefix}user_role(user_id,role_id) values
+        <foreach collection="roleIds" item="item" separator=",">
+            (#{userId,jdbcType=VARCHAR}, #{item,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <delete id="deleteOwnedRole">
+        delete from ${prefix}user_role where user_id = #{userId,jdbcType=VARCHAR};
+    </delete>
+
+</mapper>

@@ -1,0 +1,25 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+/target/
+/temp/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+.settings
+
+### IntelliJ IDEA ###
+.idea
+.idea_modules/
+*.iws
+*.iml
+*.ipr
+*.iml
+
+/.apt_generated_tests/

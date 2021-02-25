@@ -1,0 +1,10 @@
+${AnsiColor.BRIGHT_YELLOW}
+           _                 _       
+          | |               (_)      Version: ${application.version}
+ _ __ ___ | |__   __ _  ___  _       Pid: ${pid}
+| '_ ` _ \| '_ \ / _` |/ _ \| |      Port: ${server.port}
+| | | | | | | | | (_| | (_) | |      SpringBootVersion: ${spring-boot.version}
+|_| |_| |_|_| |_|\__, |\___/|_|      ${AnsiColor.BRIGHT_GREEN}Support: https://github.com/dyrnq/mhgoi-blog${AnsiColor.BRIGHT_YELLOW}
+                  __/ |              
+                 |___/               
+${AnsiColor.DEFAULT}

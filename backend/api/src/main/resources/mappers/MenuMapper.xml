@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mhgoi.blog.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="net.mhgoi.blog.entity.Menu">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+        <result column="route_name" jdbcType="VARCHAR" property="routeName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
+        <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="menu_sort" jdbcType="INTEGER" property="menuSort"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, menu_name, route_name, description, menu_url, menu_icon, pid, menu_sort
+    </sql>
+
+    <select id="getMenusByUserId" resultMap="BaseResultMap">
+        SELECT
+            m.id,
+            m.menu_name,
+            m.route_name,
+            m.menu_url,
+            m.menu_icon,
+            m.pid
+        FROM
+            ${prefix}user u,
+            ${prefix}user_role ur,
+            ${prefix}role_menu rme,
+            ${prefix}menu m
+        WHERE
+            u.id = ur.user_id
+            AND ur.role_id = rme.role_id
+            AND rme.menu_id = m.id
+            AND u.id = #{userId}
+        GROUP BY
+            m.id
+        ORDER BY
+            m.menu_sort
+    </select>
+
+    <select id="getByRoleId" resultMap="BaseResultMap">
+        SELECT
+            m.id,m.menu_name,m.pid
+        FROM
+            ${prefix}role_menu rme,
+            ${prefix}menu m
+        WHERE
+            rme.menu_id = m.id
+            AND rme.role_id = #{roleId}
+        ORDER BY m.menu_sort
+    </select>
+    <delete id="deleteOwnedMenu">
+        delete from ${prefix}role_menu where role_id = #{roleId}
+    </delete>
+
+    <delete id="deleteByPid">
+        delete from ${prefix}menu where pid = #{pid}
+    </delete>
+    
+    <insert id="addOwnedMenu">
+        insert into ${prefix}role_menu(role_id, menu_id) values
+        <foreach collection="menuIds" item="item" separator=",">
+            (#{roleId,jdbcType=VARCHAR}, #{item,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+</mapper>

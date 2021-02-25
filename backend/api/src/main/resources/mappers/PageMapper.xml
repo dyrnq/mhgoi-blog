@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mhgoi.blog.mapper.PageMapper">
+    <resultMap id="BaseResultMap" type="net.mhgoi.blog.entity.Page">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="slug" jdbcType="VARCHAR" property="slug"/>
+        <result column="content_markdown" jdbcType="LONGVARCHAR" property="contentMarkdown"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, title, slug, content_markdown, create_time, modified_time
+    </sql>
+    
+    <select id="queryPage" resultMap="BaseResultMap">
+        SELECT        
+        	a.id,
+            a.title,
+            a.slug,
+            a.create_time,
+            a.modified_time,
+            a.content_markdown
+        FROM
+        ${prefix}page a
+        <where>
+            <if test="searchWords != null and searchWords != ''">
+                and ( a.title like concat('%',#{searchWords},'%') or a.content_markdown like concat('%',#{searchWords},'%') )
+            </if>
+            <if test="title != null and title != ''">
+                and a.title like concat('%',#{title},'%')
+            </if>
+        </where>
+        ORDER BY a.create_time DESC
+    </select>
+
+
+
+
+    <select id="getById" resultMap="BaseResultMap">
+        SELECT
+        	a.id,
+            a.title,
+            a.slug,
+            a.create_time,
+            a.modified_time,
+            a.content_markdown
+        FROM
+        ${prefix}page a WHERE a.id = #{id}
+    </select>
+
+    <select id="getBySlug" resultMap="BaseResultMap">
+        SELECT
+        	a.id,
+            a.title,
+            a.slug,
+            a.create_time,
+            a.modified_time,
+            a.content_markdown
+        FROM
+        ${prefix}page a WHERE a.slug = #{slug}
+    </select>
+</mapper>

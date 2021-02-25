@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mhgoi.blog.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="net.mhgoi.blog.entity.User">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthday"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="description" jdbcType="LONGVARCHAR" property="description"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime"/>
+        <result column="state" jdbcType="CHAR" property="state"/>
+    </resultMap>
+    <sql id="Base_Column_List" databaseId="mysql">
+        id, username, fullname, `password`, mobile, email, sex, birthday, avatar, description, create_time,
+        modified_time, `state`
+    </sql>
+	<sql id="Base_Column_List" databaseId="postgresql">
+        id, username, fullname, password, mobile, email, sex, birthday, avatar, description, create_time,
+        modified_time, state
+    </sql>    
+
+    <select id="getByUsername" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${prefix}user
+        where username=#{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getByMobile" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${prefix}user
+        where mobile = #{mobile}
+    </select>
+
+    <select id="queryPage" resultMap="BaseResultMap">
+        SELECT id, username, fullname, mobile, email, sex, avatar, create_time, state
+        FROM ${prefix}user
+        <where>
+            <if test="username != null and username != ''">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="mobile != null and mobile != ''">
+                and mobile like concat('%',#{mobile},'%')
+            </if>
+            <if test="email != null and email != ''">
+                and email like concat('%',#{email},'%')
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>
