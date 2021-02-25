@@ -19,6 +19,6 @@
 
 # 文档
 
-[https://dyrnq.github.io/doc.mhgoi.net](https://dyrnq.github.io/doc.mhgoi.net)
-[https://dyrnq.gitee.io/doc.mhgoi.net](https://dyrnq.gitee.io/doc.mhgoi.net)
-[https://doc.mhgoi.net](https://doc.mhgoi.net)
+* [https://dyrnq.github.io/doc.mhgoi.net](https://dyrnq.github.io/doc.mhgoi.net)
+* [https://dyrnq.gitee.io/doc.mhgoi.net](https://dyrnq.gitee.io/doc.mhgoi.net)
+* [https://doc.mhgoi.net](https://doc.mhgoi.net)
