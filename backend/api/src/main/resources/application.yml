@@ -1,5 +1,6 @@
 server:
   port: 8001
+  shutdown: "graceful"
   use-forward-headers: true
   servlet:
     context-path: /api
@@ -11,13 +12,13 @@ server:
 #     enable-lookups: false
 #     keep-alive-timeout: -1
 
-
-
 application: 
   version: 1.0.0
   upload-path: /data/pic
 
 spring:
+  lifecycle:
+    timeout-per-shutdown-phase: "20s"
   servlet:
     multipart:
       max-file-size: 50MB

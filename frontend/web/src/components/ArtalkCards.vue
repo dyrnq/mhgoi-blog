@@ -23,7 +23,9 @@ export default {
       el: '#ArtalkComments',
       placeholder: '说点什么 (づ￣ 3￣)づ',
       defaultAvatar: 'mp',
-      // maxNest: 2,
+      gravatar: {
+        cdn: 'https://cdn.v2ex.com/gravatar/'
+      },
       pageKey: window.location.href,
       serverUrl: '/ArtalkServer',
       readMore: {
