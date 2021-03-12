@@ -4,10 +4,9 @@
 [![springboot](https://img.shields.io/badge/springboot-2.3.9.RELEASE-green)](https://img.shields.io/badge/springboot-2.3.9.RELEASE-green)
 [![vue](https://img.shields.io/badge/vue-%5E%3D2.6.11-blue)](https://img.shields.io/badge/vue-%5E%3D2.6.11-blue)
 
-
 唔该博客，一个前后端分离的博客系统。
 
-## 产品概要
+## 特色
 
 - :heart:多数据库支持
 - :cat:移动端界面适配
