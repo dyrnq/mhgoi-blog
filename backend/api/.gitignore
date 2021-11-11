@@ -21,5 +21,6 @@
 *.iml
 *.ipr
 *.iml
+*.pid
 
 /.apt_generated_tests/
