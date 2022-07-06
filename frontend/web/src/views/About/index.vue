@@ -21,7 +21,7 @@ import { getTime, getTimeInterval } from '@/utils'
 import { getPageBySlug } from '@/api/page'
 import { showFullScreenLoading, tryHideFullScreenLoading } from '@/utils/loading'
 import $ from 'jquery'
-import marked from 'marked'
+import { marked } from 'marked';
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
 

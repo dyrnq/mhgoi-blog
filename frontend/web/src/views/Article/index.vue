@@ -88,7 +88,7 @@ import { mapState } from 'vuex'
 //import { checkLogin } from '@/utils/auth'
 import { showFullScreenLoading, tryHideFullScreenLoading } from '@/utils/loading'
 import $ from 'jquery'
-import marked from 'marked'
+import { marked } from 'marked';
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
 
