@@ -37,7 +37,7 @@
     "@georges-tech/tasksfile": "5.2.0",
     "@vue/cli-plugin-babel": "4.4.4",
     "@vue/cli-plugin-eslint": "4.4.4",
-    "@vue/cli-plugin-unit-jest": "4.4.4",
+    "@vue/cli-plugin-unit-jest": "5.0.8",
     "@vue/cli-service": "4.4.4",
     "@vue/test-utils": "1.0.0-beta.29",
     "autoprefixer": "9.5.1",
