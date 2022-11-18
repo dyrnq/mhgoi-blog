@@ -16,13 +16,16 @@ module.exports = {
     open: false, // 配置自动启动浏览器
     port: port,
     // 关闭域名检查
-    disableHostCheck: true,
+    //disableHostCheck: true,
+    allowedHosts: "all",
     // 错误或警告的全屏覆盖层
-    overlay: {
-      // 警告
-      warnings: false,
-      // 错误
-      errors: true
+    client: {
+      overlay: {
+        // 警告
+        warnings: false,
+        // 错误
+        errors: true
+      }
     },
     proxy: {
       '/api': {
@@ -61,8 +64,10 @@ module.exports = {
   css: {
     loaderOptions: {
       less: {
-        globalVars: {
-          primary: '#ee5e5e'
+        lessOptions: {
+          globalVars: {
+            primary: '#ee5e5e'
+          }
         }
       }
     }
