@@ -47,7 +47,7 @@
     "babel-plugin-dynamic-import-node": "2.3.3",
     "chalk": "5.1.2",
     "connect": "3.7.0",
-    "dotenv-cli": "^4.0.0",
+    "dotenv-cli": "^6.0.0",
     "ecstatic": "^4.1.4",
     "eslint": "^8.27.0",
     "eslint-plugin-vue": "^9.7.0",
