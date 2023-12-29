@@ -92,7 +92,16 @@ logging:
   pattern:
     console: "%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n"
 
-
+springdoc:
+  packages-to-scan: net.mhgoi.blog,
+  swagger-ui:
+    enabled: true
+    disable-swagger-default-url: true
+    #operationsSorter: method
+    tagsSorter: alpha
+  api-docs:
+    enabled: true
+#    path: /v3/api-docs
 ---
 spring:
   profiles: dev-postgresql
