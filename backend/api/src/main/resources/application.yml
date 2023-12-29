@@ -59,7 +59,7 @@ mybatis-plus:
 
 
 jwt:
-  secretKey: abcdefghijklmnopqrstuvwxyz1234567890
+  secretKey: wAXqg85vLVTQlLDdEf9Yg6ecy3+rTge43EW75vFZnLivgEBQC2lPNJIbzpiF8SWOh9eM+hpZzobRQgLADy/9Ww==
   expirationTime: 86400000
   header: Authorization
 
