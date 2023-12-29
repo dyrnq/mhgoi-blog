@@ -1,7 +1,7 @@
 package net.mhgoi.blog.controller;
 
 
-import com.github.pagehelper.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import net.mhgoi.blog.dto.PageResult;
@@ -51,7 +51,7 @@ public class UserController {
     @ApiOperation(value = "查询用户", notes = "查询用户")
     public Result selectPage(@PathVariable("currentPage") Integer currentPage, @PathVariable("size") Integer size, @RequestBody(required = false) Map<String, Object> map) {
         Page<User> page = this.userService.queryPage(currentPage, size, map);
-        PageResult<User> pageResult = new PageResult<>(page.getTotal(), page.getResult());
+        PageResult<User> pageResult = new PageResult<>(page.getTotal(), page.getRecords());
         return new Result(true, StatusCode.OK, "查询成功", pageResult);
     }
 

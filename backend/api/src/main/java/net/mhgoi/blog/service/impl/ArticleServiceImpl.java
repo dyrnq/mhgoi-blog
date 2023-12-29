@@ -1,8 +1,7 @@
 package net.mhgoi.blog.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import net.mhgoi.blog.dto.Archive;
 import net.mhgoi.blog.dto.ArticleDto;
 import net.mhgoi.blog.entity.Article;
@@ -53,9 +52,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 }
             }
         }
-        Page<ArticleDto> page = PageHelper.startPage(currentPage, size);
-        this.baseMapper.queryPage(map);
-        return page;
+        return this.baseMapper.queryPage(new Page<ArticleDto>(), map);
+
     }
 
     @Override

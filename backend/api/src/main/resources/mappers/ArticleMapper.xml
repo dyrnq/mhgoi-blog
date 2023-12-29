@@ -50,17 +50,17 @@
         LEFT JOIN ${prefix}user u ON a.author_id = u.id
         LEFT JOIN ${prefix}category c ON a.category_id = c.id
         <where>
-            <if test="categoryId != null and categoryId != ''">
-                and a.category_id = #{categoryId}
+            <if test="map.categoryId != null and map.categoryId != ''">
+                and a.category_id = #{map.categoryId}
             </if>
-            <if test="searchWords != null and searchWords != ''">
-                and ( a.title like concat('%',#{searchWords},'%') or a.summary like concat('%',#{searchWords},'%') )
+            <if test="map.searchWords != null and map.searchWords != ''">
+                and ( a.title like concat('%',#{map.searchWords},'%') or a.summary like concat('%',#{map.searchWords},'%') )
             </if>
-            <if test="title != null and title != ''">
-                and a.title like concat('%',#{title},'%')
+            <if test="map.title != null and map.title != ''">
+                and a.title like concat('%',#{map.title},'%')
             </if>
-            <if test="username != null and username != ''">
-                and u.username like concat('%',#{username},'%')
+            <if test="map.username != null and map.username != ''">
+                and u.username like concat('%',#{map.username},'%')
             </if>
         </where>
         ORDER BY

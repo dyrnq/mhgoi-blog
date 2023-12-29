@@ -1,20 +1,8 @@
 package net.mhgoi.blog.service.impl;
 
-import java.io.Serializable;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-
 import net.mhgoi.blog.components.JwtTokenUtil;
 import net.mhgoi.blog.entity.User;
 import net.mhgoi.blog.exception.TokenExpiredException;
@@ -22,6 +10,14 @@ import net.mhgoi.blog.mapper.UserMapper;
 import net.mhgoi.blog.service.MenuService;
 import net.mhgoi.blog.service.RoleService;
 import net.mhgoi.blog.service.UserService;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.io.Serializable;
+import java.util.Map;
 
 /**
  * 用户表(User)表服务实现类
@@ -63,9 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public Page<User> queryPage(Integer currentPage, Integer size, Map<String, Object> map) {
-        Page<User> page = PageHelper.startPage(currentPage, size);
-        this.baseMapper.queryPage(map);
-        return page;
+        return this.baseMapper.queryPage(new Page<User>(currentPage, size), map);
     }
 
     @Override

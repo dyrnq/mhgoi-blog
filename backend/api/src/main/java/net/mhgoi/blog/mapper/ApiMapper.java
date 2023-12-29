@@ -1,6 +1,7 @@
 package net.mhgoi.blog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import net.mhgoi.blog.entity.Api;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,10 +28,11 @@ public interface ApiMapper extends BaseMapper<Api> {
     /**
      * 分页条件查询api
      *
+     * @param pg
      * @param map 查询条件
      * @return api列表
      */
-    List<Api> queryPage(Map<String, Object> map);
+    Page<Api> queryPage(Page<Api> pg, Map<String, Object> map);
 
     /**
      * 获取所有模块

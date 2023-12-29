@@ -1,6 +1,6 @@
 package net.mhgoi.blog.controller;
 
-import com.github.pagehelper.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndEntryImpl;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -41,7 +41,7 @@ public class FeedController {
         SiteInfo site = siteInfoService.getOne(null);
         Map map = new HashMap();
         Page<ArticleDto> page = articleService.queryPage(1, 30, map);
-        PageResult<ArticleDto> pageResult = new PageResult<>(page.getTotal(), page.getResult());
+        PageResult<ArticleDto> pageResult = new PageResult<>(page.getTotal(), page.getRecords());
 
         SyndFeed feed = new SyndFeedImpl();
         feed.setFeedType("rss_2.0");

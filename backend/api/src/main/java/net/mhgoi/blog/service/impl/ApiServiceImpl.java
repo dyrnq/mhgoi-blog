@@ -1,9 +1,8 @@
 package net.mhgoi.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import net.mhgoi.blog.entity.Api;
 import net.mhgoi.blog.mapper.ApiMapper;
 import net.mhgoi.blog.service.ApiService;
@@ -32,9 +31,7 @@ public class ApiServiceImpl extends ServiceImpl<ApiMapper, Api> implements ApiSe
 
     @Override
     public Page<Api> queryPage(Integer currentPage, Integer size, Map<String, Object> map) {
-        Page<Api> page = PageHelper.startPage(currentPage, size);
-        this.baseMapper.queryPage(map);
-        return page;
+        return this.baseMapper.queryPage(new Page<Api>(currentPage, size), map);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package net.mhgoi.blog.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.pagehelper.PageHelper;
 import net.mhgoi.blog.entity.Page;
 import net.mhgoi.blog.mapper.PageMapper;
 import net.mhgoi.blog.service.PageService;
@@ -13,10 +12,8 @@ import java.util.Map;
 public class PageServiceImpl extends ServiceImpl<PageMapper, Page> implements PageService {
 
     @Override
-    public com.github.pagehelper.Page<Page> queryPage(Integer currentPage, Integer size, Map<String, Object> map) {
-        com.github.pagehelper.Page<Page> page = PageHelper.startPage(currentPage, size);
-        this.baseMapper.queryPage(map);
-        return page;
+    public com.baomidou.mybatisplus.extension.plugins.pagination.Page<Page> queryPage(Integer currentPage, Integer size, Map<String, Object> map) {
+        return this.baseMapper.queryPage(new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(currentPage, size), map);
     }
 
     @Override

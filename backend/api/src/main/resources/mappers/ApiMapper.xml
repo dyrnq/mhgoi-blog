@@ -45,20 +45,20 @@
         FROM
             ${prefix}api b
         <where>
-            <if test="apiName != null and apiName != ''">
-                and b.api_name like concat('%',#{apiName},'%')
+            <if test="map.apiName != null and map.apiName != ''">
+                and b.api_name like concat('%',#{map.apiName},'%')
             </if>
-            <if test="apiUrl != null and apiUrl != ''">
-                and b.api_url like concat('%',#{apiUrl},'%')
+            <if test="map.apiUrl != null and map.apiUrl != ''">
+                and b.api_url like concat('%',#{map.apiUrl},'%')
             </if>
-            <if test="apiMethod != null and apiMethod != ''">
-                and b.api_method like concat('%',#{apiMethod},'%')
+            <if test="map.apiMethod != null and map.apiMethod != ''">
+                and b.api_method like concat('%',#{map.apiMethod},'%')
             </if>
-            <if test="moduleName != null and moduleName != ''">
-                and b.module_name = #{moduleName}
+            <if test="map.moduleName != null and map.moduleName != ''">
+                and b.module_name = #{map.moduleName}
             </if>            
-            <if test="open != null and open != ''">
-                and b.open = #{open}
+            <if test="map.open != null and map.open != ''">
+                and b.open = #{map.open}
             </if>
         </where>
         order by b.api_sort

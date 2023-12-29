@@ -1,14 +1,13 @@
 package net.mhgoi.blog.mapper;
 
-import java.util.List;
-import java.util.Map;
-
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import net.mhgoi.blog.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import java.util.Map;
 
-import net.mhgoi.blog.entity.User;
 
 /**
  * 用户表(User)表数据库访问层
@@ -37,10 +36,12 @@ public interface UserMapper extends BaseMapper<User> {
     /**
      * 分页条件查询用户
      *
-     * @param queryMap 查询条件
+     * @param pg
+     * @param map 查询条件
      * @return 查询结果
      */
-    List<User> queryPage(Map<String, Object> queryMap);
+    Page<User> queryPage(Page<User> pg, Map<String, Object> map);
+    // https://github.com/baomidou/mybatis-plus-samples/blob/master/mybatis-plus-sample-pagination/src/main/java/com/baomidou/mybatisplus/samples/pagination/mapper/UserMapper.java
 
-  
+
 }

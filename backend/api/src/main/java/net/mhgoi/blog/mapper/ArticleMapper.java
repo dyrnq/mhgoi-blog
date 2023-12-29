@@ -1,6 +1,7 @@
 package net.mhgoi.blog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import net.mhgoi.blog.dto.Archive;
 import net.mhgoi.blog.dto.ArticleDto;
 import net.mhgoi.blog.entity.Article;
@@ -20,10 +21,11 @@ public interface ArticleMapper extends BaseMapper<Article> {
     /**
      * 条件分页查询文章
      *
+     * @param pg
      * @param map 查询条件
      * @return 文章列表
      */
-    List<ArticleDto> queryPage(Map<String, Object> map);
+    Page<ArticleDto> queryPage(Page<ArticleDto> pg, Map<String, Object> map);
 
     /**
      * 根据ID查询文章

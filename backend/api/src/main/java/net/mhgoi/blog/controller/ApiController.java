@@ -1,7 +1,7 @@
 package net.mhgoi.blog.controller;
 
 
-import com.github.pagehelper.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import net.mhgoi.blog.dto.PageResult;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
@@ -38,7 +38,7 @@ public class ApiController {
     @PostMapping("/{currentPage}/{size}")
     public Result selectPage(@PathVariable("currentPage") Integer currentPage, @PathVariable("size") Integer size, @RequestBody(required = false) Map<String, Object> map) {
         Page<Api> page = apiService.queryPage(currentPage, size, map);
-        PageResult<Api> pageResult = new PageResult<>(page.getTotal(), page.getResult());
+        PageResult<Api> pageResult = new PageResult<>(page.getTotal(), page.getRecords());
         return new Result(true, StatusCode.OK, "查询成功", pageResult);
     }
 

@@ -24,11 +24,11 @@
         FROM
         ${prefix}page a
         <where>
-            <if test="searchWords != null and searchWords != ''">
-                and ( a.title like concat('%',#{searchWords},'%') or a.content_markdown like concat('%',#{searchWords},'%') )
+            <if test="map.searchWords != null and map.searchWords != ''">
+                and ( a.title like concat('%',#{map.searchWords},'%') or a.content_markdown like concat('%',#{map.searchWords},'%') )
             </if>
-            <if test="title != null and title != ''">
-                and a.title like concat('%',#{title},'%')
+            <if test="map.title != null and map.title != ''">
+                and a.title like concat('%',#{map.title},'%')
             </if>
         </where>
         ORDER BY a.create_time DESC

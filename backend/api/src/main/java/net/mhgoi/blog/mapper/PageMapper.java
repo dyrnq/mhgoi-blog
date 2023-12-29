@@ -3,7 +3,6 @@ package net.mhgoi.blog.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import net.mhgoi.blog.entity.Page;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,10 +16,11 @@ public interface PageMapper extends BaseMapper<Page> {
     /**
      * 条件分页查询文章
      *
+     * @param pg
      * @param map 查询条件
      * @return 文章列表
      */
-    List<Page> queryPage(Map<String, Object> map);
+    com.baomidou.mybatisplus.extension.plugins.pagination.Page<Page> queryPage(com.baomidou.mybatisplus.extension.plugins.pagination.Page<Page> pg, Map<String, Object> map);
 
     /**
      * 根据ID查询文章

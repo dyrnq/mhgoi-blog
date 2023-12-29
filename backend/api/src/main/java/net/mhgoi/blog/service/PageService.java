@@ -1,8 +1,7 @@
 package net.mhgoi.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.github.pagehelper.Page;
-
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import java.util.Map;
 
 
@@ -43,16 +42,14 @@ public interface PageService extends IService<net.mhgoi.blog.entity.Page> {
     /**
      * 插入页面
      *
-     * @param Page   页面
-     * @param tagIds 页面标签ID列表
+     * @param page   页面
      */
     void insertPage(net.mhgoi.blog.entity.Page page);
 
     /**
      * 更新页面
      *
-     * @param Page   页面
-     * @param tagIds 页面标签ID列表
+     * @param page   页面
      */
     void updatePage(net.mhgoi.blog.entity.Page page);
 

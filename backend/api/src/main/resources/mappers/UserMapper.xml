@@ -42,20 +42,20 @@
         SELECT id, username, fullname, mobile, email, sex, avatar, create_time, state
         FROM ${prefix}user
         <where>
-            <if test="username != null and username != ''">
-                and username like concat('%',#{username},'%')
+            <if test="map.username != null and map.username != ''">
+                and username like concat('%',#{map.username},'%')
             </if>
-            <if test="mobile != null and mobile != ''">
-                and mobile like concat('%',#{mobile},'%')
+            <if test="map.mobile != null and map.mobile != ''">
+                and mobile like concat('%',#{map.mobile},'%')
             </if>
-            <if test="email != null and email != ''">
-                and email like concat('%',#{email},'%')
+            <if test="map.email != null and map.email != ''">
+                and email like concat('%',#{map.email},'%')
             </if>
-            <if test="sex != null and sex != ''">
-                and sex = #{sex}
+            <if test="map.sex != null and map.sex != ''">
+                and sex = #{map.sex}
             </if>
-            <if test="state != null and state != ''">
-                and state = #{state}
+            <if test="map.state != null and map.state != ''">
+                and state = #{map.state}
             </if>
         </where>
     </select>

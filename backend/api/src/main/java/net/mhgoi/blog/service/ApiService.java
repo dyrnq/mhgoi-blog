@@ -1,7 +1,7 @@
 package net.mhgoi.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.github.pagehelper.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import net.mhgoi.blog.entity.Api;
 import org.springframework.cache.annotation.Cacheable;
 
