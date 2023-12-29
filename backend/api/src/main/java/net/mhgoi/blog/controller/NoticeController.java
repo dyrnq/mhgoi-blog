@@ -2,6 +2,7 @@ package net.mhgoi.blog.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
 import net.mhgoi.blog.entity.Notice;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("notice")
-@io.swagger.annotations.Api(value = "公告接口", tags = {"公告接口"})
+@Tag(name = "blog", description = "the blog API")
 public class NoticeController {
     /**
      * 服务对象

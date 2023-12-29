@@ -2,6 +2,7 @@ package net.mhgoi.blog.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
 import net.mhgoi.blog.entity.Friend;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("friend")
-@io.swagger.annotations.Api(value = "友接接口", tags = {"友接接口"})
+@Tag(name = "blog", description = "the blog API")
 public class FriendController {
     /**
      * 服务对象

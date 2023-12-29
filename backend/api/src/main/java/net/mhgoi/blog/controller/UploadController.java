@@ -1,5 +1,6 @@
 package net.mhgoi.blog.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.components.FileUploadUtil;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
@@ -22,7 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("upload")
-@io.swagger.annotations.Api(value = "上传图片接口", tags = {"上传图片接口"})
+@Tag(name = "blog", description = "the blog API")
 public class UploadController {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(UploadController.class);
     @Resource

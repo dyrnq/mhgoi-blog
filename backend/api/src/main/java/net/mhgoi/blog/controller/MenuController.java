@@ -1,6 +1,7 @@
 package net.mhgoi.blog.controller;
 
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
 import net.mhgoi.blog.entity.Menu;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("menu")
-@io.swagger.annotations.Api(value = "菜单接口", tags = {"菜单接口"})
+@Tag(name = "blog", description = "the blog API")
 public class MenuController {
     /**
      * 服务对象

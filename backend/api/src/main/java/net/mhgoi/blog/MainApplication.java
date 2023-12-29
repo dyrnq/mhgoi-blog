@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
-import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * @author 少年
@@ -33,7 +32,6 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableScheduling
-@EnableOpenApi
 @EnableCaching
 @MapperScan("net.mhgoi.blog.mapper")
 public class MainApplication extends SpringBootServletInitializer {

@@ -7,6 +7,7 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.feed.synd.SyndFeedImpl;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedOutput;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.ArticleDto;
 import net.mhgoi.blog.dto.PageResult;
 import net.mhgoi.blog.entity.SiteInfo;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("feed")
-@io.swagger.annotations.Api(value = "站点feed接口", tags = {"站点feed接口"})
+@Tag(name = "blog", description = "the blog API")
 public class FeedController {
 
     @Resource

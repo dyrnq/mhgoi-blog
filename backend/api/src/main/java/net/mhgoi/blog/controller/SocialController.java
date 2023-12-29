@@ -6,7 +6,7 @@ import net.mhgoi.blog.dto.StatusCode;
 import net.mhgoi.blog.entity.Social;
 import net.mhgoi.blog.service.SocialService;
 import org.springframework.web.bind.annotation.*;
-
+import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("social")
-@io.swagger.annotations.Api(value = "社交接口", tags = {"社交接口"})
+@Tag(name = "blog", description = "the blog API")
 public class SocialController {
     /**
      * 服务对象

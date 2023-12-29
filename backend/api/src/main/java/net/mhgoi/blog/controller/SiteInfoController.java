@@ -1,19 +1,15 @@
 package net.mhgoi.blog.controller;
 
 
-import javax.annotation.Resource;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
 import net.mhgoi.blog.entity.SiteInfo;
 import net.mhgoi.blog.service.RuntimeService;
 import net.mhgoi.blog.service.SiteInfoService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * (SiteInfo)表控制层
@@ -23,7 +19,7 @@ import net.mhgoi.blog.service.SiteInfoService;
  */
 @RestController
 @RequestMapping("siteInfo")
-@io.swagger.annotations.Api(value = "站点接口", tags = {"站点接口"})
+@Tag(name = "blog", description = "the blog API")
 public class SiteInfoController {
     /**
      * 服务对象

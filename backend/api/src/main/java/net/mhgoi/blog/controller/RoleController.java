@@ -2,6 +2,7 @@ package net.mhgoi.blog.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.PageResult;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("role")
-@io.swagger.annotations.Api(value = "角色接口", tags = {"角色接口"})
+@Tag(name = "blog", description = "the blog API")
 public class RoleController {
     /**
      * 服务对象

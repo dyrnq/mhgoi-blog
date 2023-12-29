@@ -1,5 +1,6 @@
 package net.mhgoi.blog.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("file")
-@io.swagger.annotations.Api(value = "文件接口", tags = {"文件接口"})
+@Tag(name = "blog", description = "the blog API")
 
 public class FileController {
 

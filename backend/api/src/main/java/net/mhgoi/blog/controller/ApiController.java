@@ -2,6 +2,7 @@ package net.mhgoi.blog.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.PageResult;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
@@ -22,7 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("backendApi")
-@io.swagger.annotations.Api(value = "接口", tags = {"接口"})
+@Tag(name = "blog", description = "the blog API")
 public class ApiController {
     /**
      * 服务对象
@@ -61,7 +62,7 @@ public class ApiController {
     /**
      * 新增数据
      *
-     * @param Api 实体对象
+     * @param instance 实体对象
      * @return 新增结果
      */
     @PostMapping
@@ -72,7 +73,7 @@ public class ApiController {
     /**
      * 修改数据
      *
-     * @param Api 实体对象
+     * @param instance 实体对象
      * @return 修改结果
      */
     @PutMapping

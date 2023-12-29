@@ -3,6 +3,7 @@ package net.mhgoi.blog.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.PageResult;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
@@ -23,7 +24,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("category")
-@io.swagger.annotations.Api(value = "文章类别接口", tags = {"文章类别接口"})
+@Tag(name = "blog", description = "the blog API")
 public class CategoryController {
     /**
      * 服务对象

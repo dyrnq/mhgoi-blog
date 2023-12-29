@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("tag")
-@io.swagger.annotations.Api(value = "标签接口", tags = {"标签接口"})
+@io.swagger.v3.oas.annotations.tags.Tag(name = "blog", description = "the blog API")
 public class TagController {
     /**
      * 服务对象

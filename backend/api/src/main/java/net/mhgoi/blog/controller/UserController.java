@@ -2,8 +2,8 @@ package net.mhgoi.blog.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.PageResult;
 import net.mhgoi.blog.dto.Result;
 import net.mhgoi.blog.dto.StatusCode;
@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("user")
-@Api(value = "用户接口", tags = {"用户接口"})
+@Tag(name = "blog", description = "the blog API")
 public class UserController {
     /**
      * 服务对象
@@ -48,7 +48,6 @@ public class UserController {
      * 分页查询数据
      */
     @PostMapping("/{currentPage}/{size}")
-    @ApiOperation(value = "查询用户", notes = "查询用户")
     public Result selectPage(@PathVariable("currentPage") Integer currentPage, @PathVariable("size") Integer size, @RequestBody(required = false) Map<String, Object> map) {
         Page<User> page = this.userService.queryPage(currentPage, size, map);
         PageResult<User> pageResult = new PageResult<>(page.getTotal(), page.getRecords());
@@ -62,7 +61,6 @@ public class UserController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    @ApiOperation(value = "根据ID查询用户", notes = "根据ID查询用户")
     public Result selectOne(@PathVariable Serializable id) {
         return new Result(true, StatusCode.OK, "查询成功", userService.getById(id));
     }
@@ -139,7 +137,7 @@ public class UserController {
      * @throws TokenExpiredException 令牌过期
      */
     @GetMapping("/info")
-    @ApiOperation(value = "关于我", notes = "关于我")
+    @Operation(summary = "关于我", description = "关于我")
     public Result getUserInfo(@RequestParam String token) throws TokenExpiredException {
         return new Result(true, StatusCode.OK, "操作成功", userService.getUserInfo(token));
     }

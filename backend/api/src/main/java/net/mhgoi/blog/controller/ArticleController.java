@@ -2,7 +2,8 @@ package net.mhgoi.blog.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.mhgoi.blog.dto.ArticleDto;
 import net.mhgoi.blog.dto.PageResult;
 import net.mhgoi.blog.dto.Result;
@@ -27,7 +28,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("article")
-@io.swagger.annotations.Api(value = "文章接口", tags = {"文章接口"})
+@Tag(name = "blog", description = "the blog API")
 public class ArticleController {
     /**
      * 服务对象
@@ -41,7 +42,7 @@ public class ArticleController {
      * @return 所有数据
      */
     @PostMapping("/{currentPage}/{size}")
-    @ApiOperation(value = "查询文章", notes = "查询文章")
+    @Operation(summary = "查询文章", description = "查询文章")
     public Result selectPage(@PathVariable("currentPage") Integer currentPage, @PathVariable("size") Integer size, @RequestBody(required = false) Map<String, Object> map) {
         Page<ArticleDto> page = this.articleService.queryPage(currentPage, size, map);
         PageResult<ArticleDto> pageResult = new PageResult<>(page.getTotal(), page.getRecords());
