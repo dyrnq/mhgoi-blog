@@ -150,6 +150,6 @@ public class JwtTokenUtil {
      * @return 数据声明
      */
     private Claims getClaimsFromToken(String token) throws ExpiredJwtException {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
     }
 }
