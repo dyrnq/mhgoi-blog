@@ -1,4 +1,6 @@
-import jwt_decode from 'jwt-decode'
+//import jwt_decode from 'jwt-decode'
+import { jwtDecode } from "jwt-decode";
+
 import store from '../store'
 import router from '../router'
 
@@ -24,7 +26,7 @@ export async function validateToken () {
 // 解析token(错误token返回null)
 export function parseToken (token) {
   try {
-    return jwt_decode(token)
+    return jwtDecode(token)
   } catch (e) {
     return null
   }
