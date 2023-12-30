@@ -51,7 +51,7 @@
     "ecstatic": "^4.1.4",
     "eslint": "^8.27.0",
     "eslint-plugin-vue": "^9.7.0",
-    "html-webpack-plugin": "4.0.0",
+    "html-webpack-plugin": "4.5.2",
     "less-loader": "^6.2.0",
     "mockjs": "1.0.1-beta3",
     "sass": "1.26.8",
