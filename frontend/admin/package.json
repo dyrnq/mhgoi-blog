@@ -45,7 +45,7 @@
     "babel-eslint": "10.1.0",
     "babel-jest": "24.9.0",
     "babel-plugin-dynamic-import-node": "2.3.3",
-    "chalk": "5.1.2",
+    "chalk": "5.3.0",
     "connect": "3.7.0",
     "dotenv-cli": "^4.0.0",
     "ecstatic": "^4.1.4",
