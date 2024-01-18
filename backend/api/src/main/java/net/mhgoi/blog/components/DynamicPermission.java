@@ -2,6 +2,8 @@ package net.mhgoi.blog.components;
 
 import net.mhgoi.blog.entity.Api;
 import net.mhgoi.blog.service.ApiService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -18,7 +20,7 @@ import java.util.List;
  */
 @Component
 public class DynamicPermission {
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(AppTomcatConnectorCustomizer.class);
+    private static final Logger log = LoggerFactory.getLogger(DynamicPermission.class);
 
     @Resource
     ApiService apiService;
